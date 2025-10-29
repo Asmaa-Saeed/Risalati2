@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { Instructor, UpdateInstructorData } from "@/lib/instructors";
-import { DepartmentsService, type Department } from "@/lib/departments";
-import { AcademicTitlesService, type AcademicTitle } from "@/lib/academic-titles";
+import { Instructor, UpdateInstructorData } from "@/actions/instructors";
+import { DepartmentsService, type Department } from "@/actions/departments";
+import { AcademicTitlesService, type AcademicTitle } from "@/actions/academic-titles";
 
 // Align schema with backend update payload: Id, Name, AcademicTitle (number), DepartmentId (number), Phone, Email
 const schema = z.object({

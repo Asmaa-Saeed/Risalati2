@@ -12,18 +12,17 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, Eye, ChevronUp, ChevronDown, GraduationCap, Clock, FolderOpen } from "lucide-react";
-import { Degree } from "@/lib/degrees";
+import { Degree } from "@/actions/degrees";
 
 interface DegreesTableProps {
   degrees: Degree[];
   departmentsMap?: Record<number, string>;
   onEdit: (degree: Degree) => void;
   onDelete: (degree: Degree) => void;
-  onView: (degree: Degree) => void;
   onAdd: () => void;
 }
 
-export default function DegreesTable({ degrees, departmentsMap, onEdit, onDelete, onView, onAdd }: DegreesTableProps) {
+export default function DegreesTable({ degrees, departmentsMap, onEdit, onDelete, onAdd }: DegreesTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -117,7 +116,7 @@ export default function DegreesTable({ degrees, departmentsMap, onEdit, onDelete
           className="flex items-center gap-2 text-right font-semibold text-gray-900 hover:text-teal-600 transition-colors"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          الدرجة العامة
+          الدرجة العلمية
           {column.getIsSorted() === "asc" ? (
             <ChevronUp size={16} />
           ) : column.getIsSorted() === "desc" ? (

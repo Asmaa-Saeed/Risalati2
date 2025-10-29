@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, AlertTriangle, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
-import { Department } from "@/lib/departments";
+import { Department } from "@/actions/departments";
 
 interface DeleteDepartmentConfirmModalProps {
   isOpen: boolean;

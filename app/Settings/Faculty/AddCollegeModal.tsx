@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { CreateCollegeData } from "@/lib/colleges";
+import { CreateCollegeData } from "@/actions/colleges";
 
 const collegeSchema = z.object({
   name: z.string().min(1, "اسم الكلية مطلوب"),

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { CreateDegreeData, DegreesService } from "@/lib/degrees";
+import { CreateDegreeData, DegreesService } from "@/actions/degrees";
 
 const degreeSchema = z.object({
   name: z.string().min(1, "اسم الدرجة العلمية مطلوب"),
@@ -181,16 +181,14 @@ const AddDegreeModal: React.FC<AddDegreeModalProps> = ({ isOpen, onClose, onSubm
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 نوع الدرجة العلمية
               </label>
-              <select
+              <input
                 {...register("generalDegree")}
+                type="text"
                 className={`w-full px-5 py-4 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all duration-300 text-lg ${
                   errors.generalDegree ? "border-red-500" : "border-gray-200 hover:border-gray-300"
                 }`}
-              >
-                <option value="">اختر نوع الدرجة</option>
-                <option value="1">البكالوريوس (درجة أساسية)</option>
-                <option value="0">الماجستير/الدكتوراه (درجة عليا)</option>
-              </select>
+                placeholder="اكتب نوع الدرجة (مثال: الماجستير/الدكتوراه)"
+              />
               {errors.generalDegree && (
                 <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
                   <span className="w-1 h-1 bg-red-500 rounded-full"></span>

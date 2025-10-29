@@ -12,7 +12,7 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, ChevronUp, ChevronDown } from "lucide-react";
-import { Instructor } from "@/lib/instructors";
+import { Instructor } from "@/actions/instructors";
 
 interface InstructorsTableProps {
   items: Instructor[];

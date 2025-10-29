@@ -7,7 +7,7 @@ import {
   DepartmentsService,
   CreateDepartmentData,
   UpdateDepartmentData,
-} from "@/lib/departments";
+} from "@/actions/departments";
 import DepartmentsTable from "./DepartmentsTable";
 import AddDepartmentModal from "./AddDepartmentModal";
 import EditDepartmentModal from "./EditDepartmentModal";
@@ -143,7 +143,7 @@ const handleDeleteDepartment = async () => {
   setSaving(true);
   try {
     const token = localStorage.getItem("token"); // أو حسب مكان تخزينك للتوكن
-    const response = await DepartmentsService.deleteDepartment(selectedDepartment.id, token!);
+    const response = await DepartmentsService.deleteDepartment(selectedDepartment.id);
 
     if (response.success) {
       await loadDepartments();

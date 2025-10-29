@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { DepartmentsService, Program, CreateDepartmentData } from "@/lib/departments";
+import { DepartmentsService, Program, CreateDepartmentData } from "@/actions/departments";
 
 const departmentSchema = z.object({
   name: z.string().min(1, "اسم القسم مطلوب").min(2, "اسم القسم يجب أن يكون حرفين على الأقل"),

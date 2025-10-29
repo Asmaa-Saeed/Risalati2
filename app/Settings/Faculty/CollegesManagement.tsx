@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle, AlertTriangle, Loader2, Users, Building2, GraduationCap } from "lucide-react";
-import { College, CollegesService, CreateCollegeData, UpdateCollegeData } from "@/lib/colleges";
+import { College, CollegesService, CreateCollegeData, UpdateCollegeData } from "@/actions/colleges";
 import CollegesTable from "./CollegesTable";
 import AddCollegeModal from "./AddCollegeModal";
 import EditCollegeModal from "./EditCollegeModal";

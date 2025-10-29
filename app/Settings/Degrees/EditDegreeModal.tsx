@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { Degree, UpdateDegreeData, CreateDegreeData, DegreesService } from "@/lib/degrees";
+import { Degree, UpdateDegreeData, CreateDegreeData, DegreesService } from "@/actions/degrees";
 
 const degreeSchema = z.object({
   id: z.number(),

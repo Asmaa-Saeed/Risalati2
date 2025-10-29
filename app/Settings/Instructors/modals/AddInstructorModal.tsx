@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { CreateInstructorData } from "@/lib/instructors";
-import { DepartmentsService, type Department } from "@/lib/departments";
-import { AcademicTitlesService, type AcademicTitle } from "@/lib/academic-titles";
+import { CreateInstructorData } from "@/actions/instructors";
+import { DepartmentsService, type Department } from "@/actions/departments";
+import { AcademicTitlesService, type AcademicTitle } from "@/actions/academic-titles";
 
 const schema = z.object({
   name: z.string().min(1, "الاسم مطلوب"),

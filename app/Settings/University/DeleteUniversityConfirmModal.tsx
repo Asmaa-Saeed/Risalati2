@@ -4,7 +4,7 @@ import { X, AlertTriangle, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 
-import { University } from "@/lib/universities";
+import { University } from "@/actions/universities";
 
 interface DeleteUniversityConfirmModalProps {
   isOpen: boolean;

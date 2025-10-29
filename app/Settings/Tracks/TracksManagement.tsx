@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle, AlertTriangle, Loader2 } from "lucide-react";
-import { TracksService, CreateTrackData, UpdateTrackData, Track } from "@/lib/tracks";
+import { TracksService, CreateTrackData, UpdateTrackData, Track } from "@/actions/tracks";
 import TracksTable from "./TracksTable";
 import AddTrackModal from "./AddTrackModal";
 import EditTrackModal from "./EditTrackModal";

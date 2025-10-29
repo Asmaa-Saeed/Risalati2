@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X, AlertTriangle, Loader2 } from "lucide-react";
-import { Track } from "@/lib/tracks";
+import { Track } from "@/actions/tracks";
 
 interface DeleteTrackConfirmModalProps {
   isOpen: boolean;

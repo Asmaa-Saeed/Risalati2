@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { University, UpdateUniversityData } from "@/lib/universities";
+import { University, UpdateUniversityData } from "@/actions/universities";
 
 const universitySchema = z.object({
   id: z.number(),

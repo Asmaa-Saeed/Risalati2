@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, AlertTriangle, Loader2, Users, GraduationCap, Building2 } from "lucide-react";
 import Toast from "@/app/Component/Toast";
-import { Instructor, InstructorsService, CreateInstructorData, UpdateInstructorData } from "@/lib/instructors";
+import { Instructor, InstructorsService, CreateInstructorData, UpdateInstructorData } from "@/actions/instructors";
 import InstructorsTable from "./InstructorsTable";
 import AddInstructorModal from "./modals/AddInstructorModal";
 import EditInstructorModal from "./modals/EditInstructorModal";

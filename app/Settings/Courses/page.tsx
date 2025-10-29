@@ -1,3 +1,5 @@
+"use client";
+
 import CoursesManagement from "./CoursesManagement";
 
 export default function CoursesPage() {

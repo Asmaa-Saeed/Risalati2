@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X, Trash2, AlertTriangle, Clock } from "lucide-react";
-import { Degree } from "@/lib/degrees";
+import { Degree } from "@/actions/degrees";
 
 interface DeleteDegreeConfirmModalProps {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 "use client";
 
 import { X, Calendar, Clock, User, Building2, GraduationCap } from "lucide-react";
-import { Course } from "@/lib/faculty-courses";
+import { Course } from "@/actions/faculty-courses";
 
 interface ViewCourseModalProps {
   isOpen: boolean;

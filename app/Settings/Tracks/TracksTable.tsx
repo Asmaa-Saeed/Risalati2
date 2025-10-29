@@ -13,7 +13,7 @@ import {
   CellContext,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, Eye, ChevronUp, ChevronDown } from "lucide-react";
-import { Track } from "@/lib/tracks";
+import { Track } from "@/actions/tracks";
 
 interface TracksTableProps {
   tracks: Track[];

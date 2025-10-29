@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle, AlertTriangle, Loader2 } from "lucide-react";
-import { Degree, DegreesService, CreateDegreeData, UpdateDegreeData, DegreesApiResponse } from "@/lib/degrees";
+import { Degree, DegreesService, CreateDegreeData, UpdateDegreeData, DegreesApiResponse } from "@/actions/degrees";
 import DegreesTable from "./DegreesTable";
 import AddDegreeModal from "./AddDegreeModal";
 import EditDegreeModal from "./EditDegreeModal";
-import ViewDegreeModal from "./ViewDegreeModal";
 import DeleteDegreeConfirmModal from "./DeleteDegreeConfirmModal";
 
-type ModalType = "add" | "edit" | "view" | "delete" | null;
+type ModalType = "add" | "edit" | "delete" | null;
 
 export default function DegreesManagement() {
   const [degrees, setDegrees] = useState<Degree[]>([]);
@@ -70,57 +69,56 @@ export default function DegreesManagement() {
     setSaving(true);
     try {
       const response = await DegreesService.createDegree(degreeData);
-      if (response.succeeded && response.data) {
-        setDegrees(prev => [...prev, response.data!]);
-        setMessage({ type: "success", text: response.message! });
-        setCurrentPage(1); // Reset to first page after adding
-      } else if (response.succeeded && !response.data) {
-        // Backend may return success without the full entity; reload list to reflect changes immediately
-        await loadDegrees();
-        setMessage({ type: "success", text: response.message || "تم إضافة الدرجة العلمية" });
+
+      if (response.succeeded) {
+        if (response.data) {
+          setDegrees((prev) => [...prev, response.data!]);
+        } else {
+          // slight delay to allow backend to update DB
+          setTimeout(() => loadDegrees(), 500);
+        }
+        setMessage({ type: "success", text: response.message || "تم إضافة الدرجة العلمية بنجاح" });
         setCurrentPage(1);
+        setActiveModal(null); // اغلاق المودال بعد الحفظ
       } else {
-        setMessage({ type: "error", text: response.message || "حدث خطأ في إضافة الدرجة العلمية" });
+        setMessage({ type: "error", text: response.message || "حدث خطأ أثناء الإضافة" });
       }
-      setTimeout(() => setMessage(null), 3000);
     } catch (error) {
       setMessage({ type: "error", text: "حدث خطأ في إضافة الدرجة العلمية" });
-      setTimeout(() => setMessage(null), 3000);
     } finally {
       setSaving(false);
+      setTimeout(() => setMessage(null), 3000);
     }
   };
-
+  
   const handleEditDegree = async (degreeData: UpdateDegreeData) => {
     setSaving(true);
     try {
       const response = await DegreesService.updateDegree(degreeData);
-      if (response.succeeded && response.data) {
-        setDegrees(prev => prev.map(degree =>
-          degree.id === degreeData.id ? response.data! : degree
-        ));
-        setMessage({ type: "success", text: response.message! });
-
-        // Adjust current page if necessary after edit
-        const newTotalPages = Math.ceil(degrees.length / itemsPerPage);
-        if (currentPage > newTotalPages) {
-          setCurrentPage(newTotalPages);
+  
+      if (response.succeeded) {
+        if (response.data) {
+          const updatedDegree = response.data;
+          setDegrees((prev) =>
+            prev.map((d) => (d.id === updatedDegree.id ? updatedDegree : d))
+          );
+        } else {
+          // slight delay to ensure DB updated
+          setTimeout(() => loadDegrees(), 500);
         }
-      } else if (response.succeeded && !response.data) {
-        // If API doesn't return the updated entity, reload to reflect latest data
-        await loadDegrees();
         setMessage({ type: "success", text: response.message || "تم تحديث الدرجة العلمية" });
+        setActiveModal(null); // اغلاق المودال بعد الحفظ
       } else {
-        setMessage({ type: "error", text: response.message || "حدث خطأ في تحديث الدرجة العلمية" });
+        setMessage({ type: "error", text: response.message || "حدث خطأ أثناء التحديث" });
       }
-      setTimeout(() => setMessage(null), 3000);
     } catch (error) {
       setMessage({ type: "error", text: "حدث خطأ في تحديث الدرجة العلمية" });
-      setTimeout(() => setMessage(null), 3000);
     } finally {
       setSaving(false);
+      setTimeout(() => setMessage(null), 3000);
     }
   };
+  
 
   const handleDeleteDegree = async () => {
     if (!selectedDegree) return;
@@ -218,7 +216,6 @@ export default function DegreesManagement() {
         departmentsMap={departmentsMap}
         onEdit={(degree) => openModal("edit", degree)}
         onDelete={(degree) => openModal("delete", degree)}
-        onView={(degree) => openModal("view", degree)}
         onAdd={() => openModal("add")}
       />
 
@@ -328,11 +325,7 @@ export default function DegreesManagement() {
         loading={saving}
       />
 
-      <ViewDegreeModal
-        isOpen={activeModal === "view"}
-        onClose={closeModal}
-        degree={selectedDegree}
-      />
+    
 
       <DeleteDegreeConfirmModal
         isOpen={activeModal === "delete"}

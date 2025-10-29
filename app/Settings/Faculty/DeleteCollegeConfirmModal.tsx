@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X, Trash2, AlertTriangle } from "lucide-react";
-import { College } from "@/lib/colleges";
+import { College } from "@/actions/colleges";
 
 interface DeleteCollegeConfirmModalProps {
   isOpen: boolean;

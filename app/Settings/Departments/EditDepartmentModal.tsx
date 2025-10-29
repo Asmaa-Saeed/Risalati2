@@ -10,7 +10,7 @@ import {
   Program,
   UpdateDepartmentData,
   Department,
-} from "@/lib/departments";
+} from "@/actions/departments";
 
 // ✅ Validation Schema
 const departmentSchema = z.object({

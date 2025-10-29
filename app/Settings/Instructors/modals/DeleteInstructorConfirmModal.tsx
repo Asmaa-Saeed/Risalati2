@@ -1,7 +1,7 @@
 "use client";
 
 import { X, Trash2, AlertTriangle } from "lucide-react";
-import { Instructor } from "@/lib/instructors";
+import { Instructor } from "@/actions/instructors";
 
 interface Props {
   isOpen: boolean;

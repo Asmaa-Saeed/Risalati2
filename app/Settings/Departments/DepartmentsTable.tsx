@@ -13,7 +13,7 @@ import {
   CellContext,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, ChevronUp, ChevronDown, Building2 } from "lucide-react";
-import { Department } from "@/lib/departments";
+import { Department } from "@/actions/departments";
 
 interface DepartmentsTableProps {
   departments: Department[];

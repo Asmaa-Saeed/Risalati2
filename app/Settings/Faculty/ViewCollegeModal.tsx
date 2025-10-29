@@ -1,7 +1,7 @@
 "use client";
 
 import { X, Building2 } from "lucide-react";
-import { College } from "@/lib/colleges";
+import { College } from "@/actions/colleges";
 
 interface ViewCollegeModalProps {
   isOpen: boolean;

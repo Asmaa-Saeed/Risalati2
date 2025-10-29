@@ -10,7 +10,7 @@ import {
   CreateUniversityData,
   UpdateUniversityData,
   UniversitiesApiResponse
-} from "@/lib/universities";
+} from "@/actions/universities";
 import UniversitiesTable from "./UniversitiesTable";
 import AddUniversityModal from "./AddUniversityModal";
 import EditUniversityModal from "./EditUniversityModal";

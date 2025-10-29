@@ -49,6 +49,7 @@ import DegreesManagement from "./Degrees/DegreesManagement";
 import UniversitiesManagement from "./University/UniversitiesManagement";
 import DepartmentsManagement from "./Departments/DepartmentsManagement";
 import TracksManagement from "./Tracks/TracksManagement";
+import IntakesManagement from "./Intakes/page";
 
 // Settings sections
 type SettingsSection =
@@ -61,7 +62,8 @@ type SettingsSection =
   | "colleges"
   | "departments"
   | "degrees"
-  | "tracks";
+  | "tracks"
+  | "intakes";
 
 // Mock user data type
 interface UserData {
@@ -152,28 +154,35 @@ export default function SettingsPage() {
   useEffect(() => {
     const loadUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const userData = localStorage.getItem("user");
-
-        // Check if both token and user data exist
-        if (!token || !userData) {
-          // Show error message and provide option to go back
-          setMessage({
-            type: "error",
-            text: "يرجى تسجيل الدخول أولاً للوصول إلى الإعدادات"
-          });
-          setLoading(false);
+        // Skip if running on server side
+        if (typeof window === 'undefined') {
           return;
         }
 
-        // Load user data
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-        setProfileForm({
-          name: parsedUser.name || "",
-          email: parsedUser.email || "",
-          phone: parsedUser.phone || "",
-        });
+        const token = localStorage.getItem("token");
+        const userData = localStorage.getItem("user");
+
+        // If no token or user data, just return without redirecting
+        // The auth provider will handle the redirection if needed
+        if (!token || !userData) {
+          console.log('No auth data found, but continuing to load public content');
+          return;
+        }
+
+        try {
+          // Load user data
+          const parsedUser = JSON.parse(userData);
+          setUser(parsedUser);
+          setProfileForm({
+            name: parsedUser.name || "",
+            email: parsedUser.email || "",
+            phone: parsedUser.phone || "",
+          });
+        } catch (parseError) {
+          console.error('Error parsing user data:', parseError);
+          // Don't redirect on parse error, just log it
+          return;
+        }
 
         // Load settings from API
         const settingsResponse = await getUserSettings();
@@ -320,6 +329,7 @@ export default function SettingsPage() {
     { id: "departments", label: "الاقسام", icon: <FolderOpen size={20} /> },
     { id: "degrees", label: "الدرجات العلمية", icon: <GraduationCap size={20} /> },
     { id: "tracks", label: "المسارات", icon: <Route size={20} /> },
+    { id: "intakes", label: "الأعوام الدراسية", icon: <Calendar size={20} /> },
   ];
 
   if (loading) {
@@ -355,7 +365,7 @@ export default function SettingsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Message Alert */}
-        {message && (
+        {message && !message.text.includes("تسجيل الدخول") && (
           <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
             message.type === "success"
               ? "bg-green-50 text-green-800 border border-green-200"
@@ -367,14 +377,6 @@ export default function SettingsPage() {
               <AlertTriangle size={20} />
             )}
             <span>{message.text}</span>
-            {message.type === "error" && message.text.includes("تسجيل الدخول") && (
-              <button
-                onClick={() => router.push("/")}
-                className="mr-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
-              >
-                العودة للرئيسية
-              </button>
-            )}
           </div>
         )}
 
@@ -783,6 +785,11 @@ export default function SettingsPage() {
               {/* Tracks Section */}
               {activeSection === "tracks" && (
                 <TracksManagement />
+              )}
+
+              {/* Intakes Section */}
+              {activeSection === "intakes" && (
+                <IntakesManagement />
               )}
             </div>
           </div>

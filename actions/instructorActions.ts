@@ -1,7 +1,7 @@
 // 📁 /actions/instructors.ts
 // API calls for instructors — ready to connect with backend
 
-import type { Instructor } from "@/lib/instructors";
+import type { Instructor } from "@/actions/instructors";
 
 const API_URL = "https://professor.runasp.net/api"; // ✅ ثابت ومباشر — الباك عندك جاهز
 

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
-import { UpdateTrackData, TracksService, Track, LookupItem } from "@/lib/tracks";
+import { UpdateTrackData, TracksService, Track, LookupItem } from "@/actions/tracks";
 
 const trackSchema = z.object({
   name: z.string().min(1, "اسم المسار مطلوب").min(2, "اسم المسار يجب أن يكون حرفين على الأقل"),

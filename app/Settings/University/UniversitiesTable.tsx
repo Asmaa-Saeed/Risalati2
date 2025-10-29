@@ -13,7 +13,7 @@ import {
   CellContext,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, Eye, ChevronUp, ChevronDown } from "lucide-react";
-import { University } from "@/lib/universities";
+import { University } from "@/actions/universities";
 
 interface UniversitiesTableProps {
   universities: University[];

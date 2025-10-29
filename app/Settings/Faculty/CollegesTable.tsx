@@ -12,7 +12,7 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Search, Plus, Edit, Trash2, Eye, ChevronUp, ChevronDown } from "lucide-react";
-import { College } from "@/lib/colleges";
+import { College } from "@/actions/colleges";
 
 interface CollegesTableProps {
   colleges: College[];

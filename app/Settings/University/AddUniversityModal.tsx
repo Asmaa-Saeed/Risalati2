@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X, Save, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { CreateUniversityData, UniversitiesService } from "@/lib/universities";
+import { CreateUniversityData, UniversitiesService } from "@/actions/universities";
 
 const universitySchema = z.object({
   name: z.string().min(1, "اسم الجامعة مطلوب").min(2, "اسم الجامعة يجب أن يكون حرفين على الأقل"),
