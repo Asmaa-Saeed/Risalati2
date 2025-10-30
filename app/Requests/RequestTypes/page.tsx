@@ -12,11 +12,10 @@ import {
 } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-// ملاحظــة: صفحات page.tsx التانية ماينفعش تاخد props مباشرة
-// لذلك هنستدعيها كـ components ونمرر الفلاتر عبر query أو context لاحقًا.
-import AdmissionRequests from "../RegistrationCard/page";
-import RegistrationForms from "../RegistrationForm/page";
-import StudentsPage from "../Student/page";
+import AdmissionRequestsComponent from "../AdmissionRequestsComponent";
+import RegistrationFormComponent from "../RegistrationFormComponent";
+import StudentsComponent from "../StudentsComponent";
+
 import SignOutButton from "@/app/Component/SignOutButton";
 import DegreeMsarFilter from "@/app/Component/FilterBar";
 
@@ -31,10 +30,6 @@ export default function MainLayout() {
   const deptParam = params.get("departmentId");
   const departmentId = deptParam ? Number(deptParam) : undefined;
 
-  const SettingPage = () => {
-    router.push(`/Settings`);
-  };
-
   const [activePage, setActivePage] = useState<
     "requests" | "forms" | "students" | "attendance" | "followup" | "exams"
   >("requests");
@@ -44,10 +39,6 @@ export default function MainLayout() {
     msarId: null,
   });
 
-  const handleGoBack = () => {
-    router.back();
-  };
-
   const handleFilterChange = useCallback((filters: Filters) => {
     setSelectedFilters((prev) => {
       if (prev.degreeId === filters.degreeId && prev.msarId === filters.msarId)
@@ -56,14 +47,17 @@ export default function MainLayout() {
     });
   }, []);
 
+  const SettingPage = () => router.push(`/Settings`);
+  const handleGoBack = () => router.back();
+
   const renderContent = () => {
     switch (activePage) {
       case "requests":
-        return <AdmissionRequests key="requests" />;
+        return <AdmissionRequestsComponent />;
       case "forms":
-        return <RegistrationForms key="forms" />;
+        return <RegistrationFormComponent />;
       case "students":
-        return <StudentsPage key="students" />;
+        return <StudentsComponent />;
       case "attendance":
         return <div className="p-4">📋 كشف الغياب</div>;
       case "followup":
@@ -71,7 +65,7 @@ export default function MainLayout() {
       case "exams":
         return <div className="p-4">🎓 لجان الامتحانات</div>;
       default:
-        return <AdmissionRequests key="default" />;
+        return <AdmissionRequestsComponent />;
     }
   };
 

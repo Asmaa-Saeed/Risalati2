@@ -25,10 +25,10 @@ export default function AdmissionRequestsComponent() {
   const params = useSearchParams();
   const departmentId = params.get("departmentId");
 
-  const filters: Filters = {
-    degreeId: params.get("degreeId") ? Number(params.get("degreeId")) : null,
-    msarId: params.get("msarId") ? Number(params.get("msarId")) : null,
-  };
+  const [filters, setFilters] = useState<Filters>({
+    degreeId: null,
+    msarId: null,
+  });
 
   const [students, setStudents] = useState<any[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<any[]>([]);
@@ -56,7 +56,13 @@ export default function AdmissionRequestsComponent() {
     return headers;
   };
 
-  // ✅ تحميل الدرجات والمسارات
+  useEffect(() => {
+    setFilters({
+      degreeId: params.get("degreeId") ? Number(params.get("degreeId")) : null,
+      msarId: params.get("msarId") ? Number(params.get("msarId")) : null,
+    });
+  }, [params]);
+
   useEffect(() => {
     const fetchLookups = async () => {
       try {
